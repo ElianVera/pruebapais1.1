@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 
 import com.squareup.picasso.Picasso;
 
@@ -24,23 +25,20 @@ public class Paisadaptador extends ArrayAdapter<nombrepais> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-        if (view == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.paisitem, null);
-        }
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View item = inflater.inflate(R.layout.paisitem,null);
 
-        nombrepais country = countryList.get(position);
+    //Variables para mostrar en el paistem.xml los nombres de los países, capitales y banderas
+        TextView lblPais = (TextView)item.findViewById(R.id.nombrepais);
+        lblPais.setText(getItem(position).getName());
+        TextView lblcapital = (TextView)item.findViewById(R.id.nombrecapital);
+        lblcapital.setText(getItem(position).getName());
+        ImageView imageView = (ImageView)item.findViewById(R.id.banderaimg);
+        Glide.with(this.getContext())
+                .load(getItem(position).getURL()).into(imageView);
 
-        if (country != null) {
-            TextView countryName = view.findViewById(R.id.nombrepais);
-            TextView countryCapital = view.findViewById(R.id.nombrecapital);
-            ImageView countryFlag = view.findViewById(R.id.banderaimg);
-            countryName.setText(country.getName());
-            countryCapital.setText(country.getCapital());
-            Picasso.get().load(country.getFlagURL()).into(countryFlag);
-        }
+        return (item);
 
-        return view;
+
     }
 }

@@ -28,8 +28,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listViewCountries = findViewById(R.id.listViewCountries);
+
         countryList = new ArrayList<>();
+        listViewCountries = findViewById(R.id.listViewCountries);
         adapter = new Paisadaptador(this, countryList);
         listViewCountries.setAdapter(adapter);
         new FetchCountryData().execute();
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 InputStream inputStream = connection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder stringBuilder = new StringBuilder();
-
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line).append("\n");

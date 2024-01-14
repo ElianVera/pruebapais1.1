@@ -13,18 +13,18 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 public class Paisadaptador extends ArrayAdapter<nombrepais> {
 
+        public Paisadaptador(Context context, ArrayList<nombrepais> countryList) {
+        super(context, R.layout.paisitem, countryList);
+        this.countryList = countryList;
+        this.context = context;
+
+    }
     private final Context context;
     private final ArrayList<nombrepais> countryList;
-    public Paisadaptador(Context context, ArrayList<nombrepais> countryList) {
-        super(context, R.layout.paisitem, countryList);
-        this.context = context;
-        this.countryList = countryList;
-    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.paisitem, null);
